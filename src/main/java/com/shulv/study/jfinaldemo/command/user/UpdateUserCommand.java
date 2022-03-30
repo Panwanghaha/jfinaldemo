@@ -23,10 +23,14 @@ public class UpdateUserCommand implements BaseCommand<User> {
 
         if(id != null){
             String loginName = (String) dataMap.get(UserConstant.Params.LOGIN_NAME);
-            System.out.println(loginName);
-
+//            System.out.println(loginName);
+            User user = userService.find(id);
+            user.setLoginName(loginName);
+            user.update();
+            return user;
         }
 
-        return userService.find(id);
+        return null;
     }
 }
+

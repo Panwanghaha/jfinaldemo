@@ -2,9 +2,7 @@ package com.shulv.study.jfinaldemo.controller;
 
 import com.jfinal.core.Path;
 import com.shulv.study.jfinaldemo.base.BaseController;
-import com.shulv.study.jfinaldemo.command.user.CreateUserCommand;
-import com.shulv.study.jfinaldemo.command.user.FindUserCommand;
-import com.shulv.study.jfinaldemo.command.user.UpdateUserCommand;
+import com.shulv.study.jfinaldemo.command.user.*;
 
 @Path("/user")
 public class UserController extends BaseController {
@@ -13,7 +11,7 @@ public class UserController extends BaseController {
      * Method：GET
      */
     public void search() {
-
+        this.renderJson(exec(SearchUserCommand.class));
     }
 
     /**
@@ -38,5 +36,13 @@ public class UserController extends BaseController {
      */
     public void update() {
         this.renderJson(exec(UpdateUserCommand.class));
+    }
+
+    /**
+     * 删除指定ID用户信息
+     * Method：GET
+     */
+    public void delete(){
+        this.renderJson(exec(DeleteUserCommand.class));
     }
 }

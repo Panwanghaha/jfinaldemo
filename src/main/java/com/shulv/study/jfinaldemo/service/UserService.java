@@ -1,6 +1,7 @@
 package com.shulv.study.jfinaldemo.service;
 
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.shulv.study.jfinaldemo.exception.BusinessException;
 import com.shulv.study.jfinaldemo.interceptor.ValidatorInterceptor;
@@ -43,7 +44,16 @@ public class UserService {
      */
     @NotNull(message = "指定用户不存在")
     public User find(String id) {
-
         return User.dao.findById(id);
+    }
+
+    /**
+     * 查询用户信息
+     */
+    public Page<User> search(){
+        String from = "from user";
+        String totalRowSql = "select count(*) " + from;
+        String findSql = "select * " + from ;
+        return User.dao.paginateByFullSql(1, 10, totalRowSql, findSql, 18);
     }
 }
